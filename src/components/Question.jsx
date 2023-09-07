@@ -75,7 +75,7 @@ function Question({ question }) {
             <p>{question.option0} { option0Quantity }</p>
             <p>{question.option1} { option1Quantity }</p>
           </section>
-          <p>Total de respostas: { option0Quantity + option1Quantity }</p>
+          <p className='total-responses'>Total de respostas: { option0Quantity + option1Quantity }</p>
         </>
       )}
     </article>

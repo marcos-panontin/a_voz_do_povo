@@ -3,17 +3,29 @@ function findPeopleWithSameAnswers(previousAnswers) {
     const userAnswers = JSON.parse(localStorage.getItem('userAnswers'));
 
   if (!userAnswers) return;
-  const peopleWithSameAnswers = userAnswers.filter((user) => {
-    const userAnswers = user.answers;
-    const userAnswersLength = userAnswers.length;
-    let sameAnswers = 0;
-    for (let index = 0; index < userAnswersLength; index += 1) {
-      if (userAnswers[index].answeredOption === previousAnswers[index].answeredOption) {
-        sameAnswers += 1;
-      }
+
+  const groupedAnswers = {};
+  for (const answer of previousAnswers) {
+    const userId = answer.user_id;
+    if (!groupedAnswers[userId]) {
+      groupedAnswers[userId] = [];
     }
-    return sameAnswers === userAnswersLength;
-  });
+    groupedAnswers[userId].push(answer);
+  }
+
+  console.log(groupedAnswers);
+
+  let peopleWithSameAnswers = 0;
+  for (const userId in groupedAnswers) {
+    const answers = groupedAnswers[userId];
+    const allAnswersMatch = answers.every(answer => {
+      const question = userAnswers.find(question => question.id === answer.question_id);
+      return question.answer === answer.answer;
+    });
+    if (allAnswersMatch) {
+      peopleWithSameAnswers += 1;
+    }
+  }
   return peopleWithSameAnswers;
 }
 

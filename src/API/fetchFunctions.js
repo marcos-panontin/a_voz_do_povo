@@ -34,5 +34,4 @@ export const sendAnswerToDB = async (optionSelected, questionId) => {
       body: JSON.stringify(requisitionBody),
   });
   const response = await data.json();
-  console.log(response);
-}
+  return response;}

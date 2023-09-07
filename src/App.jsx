@@ -8,12 +8,13 @@ import getUserToken from './services/getUserToken';
 import getUserAnswersOnPageLoad from './services/getUserAnswersOnPageLoad';
 import QuizResults from './components/QuizResults';
 import checkIfAllQuestionsAreAnswered from './services/checkIfAllQuestionsAreAnswered';
+import findPeopleWithSameAnswers from './services/findPeopleWithSameAnswers';
 
 function App() {
 
   const [previousAnswers, setPreviousAnswers] = useState([]);
   const [allAnswered, setAllAnswered] = useState(checkIfAllQuestionsAreAnswered() || false);
-  const [peopleWithSameAnswers, setPeopleWithSameAnswers] = useState(0);
+  const [peopleWithSameAnswers, setPeopleWithSameAnswers] = useState(findPeopleWithSameAnswers(previousAnswers) || 0);
 
   useEffect(() => {
 

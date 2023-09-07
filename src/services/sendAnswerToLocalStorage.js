@@ -1,6 +1,3 @@
-import { questions } from "../data/questions";
-
-
 function sendAnswerToLocalStorage(questionId, optionSelected) {
   const userAnswers = JSON.parse(localStorage.getItem('userAnswers'));
   const questionIndex = userAnswers.findIndex((question) => question.id === questionId);

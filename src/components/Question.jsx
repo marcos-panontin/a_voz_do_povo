@@ -5,6 +5,8 @@ import PreviousAnswersContext from '../context/PreviousAnswersContext';
 import calculateValues from '../services/calculateValues';
 import sendAnswerToLocalStorage from '../services/sendAnswerToLocalStorage';
 import findQuestionInLocalStorage from '../services/findQuestionInLocalStorage';
+import checkIfAllQuestionsAreAnswered from '../services/checkIfAllQuestionsAreAnswered';
+import findPeopleWithSameAnswers from '../services/findPeopleWithSameAnswers';
 
 function Question({ question }) {
   // State variables for option quantities and question ID
@@ -16,20 +18,22 @@ function Question({ question }) {
   const questionInLocalStorage = findQuestionInLocalStorage(question.id);
 
   // Get previous answers from context
-  const { previousAnswers } = useContext(PreviousAnswersContext);
+  const { previousAnswers, setAllAnswered, setPeopleWithSameAnswers } = useContext(PreviousAnswersContext);
 
   // Effect to update quantities when `questionInLocalStorage.answered` changes
   useEffect(() => {
+
     // Only run the effect when `questionInLocalStorage.answered` changes
-    if (questionInLocalStorage.answered) {
+    if (questionInLocalStorage && questionInLocalStorage.answered) {
       const { option0, option1 } = calculateValues(previousAnswers, questionId);
       setOption0Quantity(option0);
       setOption1Quantity(option1);
     }
-  }, [questionInLocalStorage.answered, previousAnswers, questionId]);
+  }, [questionInLocalStorage, previousAnswers, questionId]);
 
   // State variable for tracking if the question is answered
-  const [answered, setAnswered] = useState(questionInLocalStorage.answered);
+  const [answered, setAnswered] = useState(questionInLocalStorage?.answered || false);
+
 
   // Function to handle button click and update state and data
   const handleClick = async (optionSelected) => {
@@ -40,6 +44,12 @@ function Question({ question }) {
 
     // Store answer in local storage
     sendAnswerToLocalStorage(questionId, optionSelected);
+
+    // Check if all questions are answered
+    if (checkIfAllQuestionsAreAnswered()) {
+      setAllAnswered(true);
+      setPeopleWithSameAnswers(findPeopleWithSameAnswers(previousAnswers)) ;
+    }
 
     // Send answer to the database
     await sendAnswerToDB(optionSelected, questionId);
@@ -78,6 +88,7 @@ Question.propTypes = {
     question: PropTypes.string.isRequired,
     option0: PropTypes.string.isRequired,
     option1: PropTypes.string.isRequired,
+    answered: PropTypes.bool.isRequired,
   }).isRequired,
 };
 

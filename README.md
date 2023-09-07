@@ -8,6 +8,7 @@ A aplicação A Voz do Povo é uma aplicação FullStack que coleta respostas da
 
 ## Links Importantes
 
+- **Deploy Frontend:** [A Voz do Povo Frontend](https://marcos-panontin.github.io/a_voz_do_povo/)
 - **API:** [A Voz do Povo API](https://a-voz-do-povo-api.onrender.com/)
 - **Repositório do Backend:** [A Voz do Povo Frontend](https://github.com/marcos-panontin/a_voz_do_povo-backend)
 

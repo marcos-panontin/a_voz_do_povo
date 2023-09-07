@@ -1,23 +1,28 @@
-import { useState } from 'react'
-import { fetchAllAnswersById, sendAnswerToDB } from '../API/fetchFunctions';
+import { useState, useContext } from 'react'
+import { sendAnswerToDB } from '../API/fetchFunctions';
+import PreviousAnswersContext from '../context/PreviousAnswersContext';
+import calculateValues from '../services/calculateValues';
 
 function Question({ question }) {
+
+  const { previousAnswers } = useContext(PreviousAnswersContext);
+  console.log(previousAnswers);
 
   const [answered, setAnswered] = useState(false);
   const [option0Quantity, setOption0Quantity] = useState(0);
   const [option1Quantity, setOption1Quantity] = useState(0);
 
-  const questionId = question.question_id;
-
+  const questionId = question.id;
   
   const handleClick = async (optionSelected) => {
 
-    // await sendAnswerToDB(optionSelected, questionId)
-    const response = await fetchAllAnswersById(questionId);
+    const { option0, option1 } = calculateValues(previousAnswers, questionId, optionSelected);
+    setOption0Quantity(option0);
+    setOption1Quantity(option1);
     setAnswered(true);
-    const { count_option_0, count_option_1 } = response.message;
-    setOption0Quantity(count_option_0);
-    setOption1Quantity(count_option_1);
+
+    await sendAnswerToDB(optionSelected, questionId)
+
   }
 
   return (
@@ -25,8 +30,8 @@ function Question({ question }) {
       <h2>{question.question}</h2>
       {!answered &&
       <section>
-        <button onClick={() => handleClick(0)}>{question.option0}</button>
-        <button onClick={() => handleClick(1)}>{question.option1}</button>
+        <button disabled={previousAnswers.length === 0 ? true : false} onClick={() => handleClick(0)}>{question.option0}</button>
+        <button disabled={previousAnswers.length === 0 ? true : false} onClick={() => handleClick(1)}>{question.option1}</button>
       </section>
     }
 
@@ -36,7 +41,7 @@ function Question({ question }) {
         <p>{question.option0} { option0Quantity }</p>
         <p>{question.option1} { option1Quantity }</p>
         </section>
-        <p>Total de respostas: { Number(option0Quantity) + Number(option1Quantity) }</p>
+        <p>Total de respostas: { option0Quantity + option1Quantity }</p>
         </>
 
       )}

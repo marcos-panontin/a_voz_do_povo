@@ -1,19 +1,18 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import { fetchAllQuestions, fetchAllAnswers } from './API/fetchFunctions'
+import { useEffect, useState } from 'react';
+import PreviousAnswersContext from './context/PreviousAnswersContext';
+import './App.css';
+import { fetchAllAnswers } from './API/fetchFunctions';
+import { questions } from './data/questions';
 import Question from './components/Question';
 
 function App() {
 
-  const [questions, setQuestions] = useState([]);
   const [previousAnswers, setPreviousAnswers] = useState([]);
 
   useEffect(() => {
 
     const initialFetch = async () => {
-      const questionsData = await fetchAllQuestions();
       const answersData = await fetchAllAnswers();
-      setQuestions(questionsData);
       setPreviousAnswers(answersData)
     }
 
@@ -22,9 +21,12 @@ function App() {
 
   return (
     <>
+      <PreviousAnswersContext.Provider value={{ previousAnswers }}>
+        
       <h1>A Voz Do Povo</h1>
       {questions.map((question) => 
-      (<Question key={question.question_id} question={question} />))}
+      (<Question key={question.question} question={question} />))}
+      </PreviousAnswersContext.Provider>
     </>
   )
 }

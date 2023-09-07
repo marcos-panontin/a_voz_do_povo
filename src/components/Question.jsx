@@ -6,7 +6,6 @@ import calculateValues from '../services/calculateValues';
 function Question({ question }) {
 
   const { previousAnswers } = useContext(PreviousAnswersContext);
-  console.log(previousAnswers);
 
   const [answered, setAnswered] = useState(false);
   const [option0Quantity, setOption0Quantity] = useState(0);

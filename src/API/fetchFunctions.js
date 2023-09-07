@@ -19,11 +19,13 @@ export const fetchAllAnswersById = async (id) => {
 }
 
 export const sendAnswerToDB = async (optionSelected, questionId) => {
-console.log('entrou na send');
+
+  const userToken = localStorage.getItem('userToken');
+
   const requisitionBody = {
     questionId,
     optionSelected,
-    userId: 'marcos'
+    userId: userToken
 }
   
   const data = await fetch(`${BASE_URL}/answers`, {
@@ -31,7 +33,6 @@ console.log('entrou na send');
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requisitionBody),
   });
-  console.log(data);
   const response = await data.json();
   console.log(response);
 }

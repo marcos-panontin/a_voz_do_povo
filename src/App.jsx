@@ -4,6 +4,7 @@ import './App.css';
 import { fetchAllAnswers } from './API/fetchFunctions';
 import { questions } from './data/questions';
 import Question from './components/Question';
+import getUserToken from './services/getUserToken';
 
 function App() {
 
@@ -17,15 +18,15 @@ function App() {
     }
 
     initialFetch();
+    getUserToken();
   }, [])
 
   return (
     <>
       <PreviousAnswersContext.Provider value={{ previousAnswers }}>
-        
-      <h1>A Voz Do Povo</h1>
-      {questions.map((question) => 
-      (<Question key={question.question} question={question} />))}
+        <h1>A Voz Do Povo</h1>
+        {questions.map((question) => 
+        (<Question key={question.question} question={question} />))}
       </PreviousAnswersContext.Provider>
     </>
   )

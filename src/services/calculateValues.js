@@ -1,6 +1,6 @@
 import React from 'react'
 
-function calculateValues(previousAnswers, questionId, optionSelected) {
+function calculateValues(previousAnswers, questionId, optionSelected = 0) {
   const filteredAnswersOption0 = previousAnswers.filter((answer) => (answer.question_id === questionId && answer.option_selected === 0)).length;
   const filteredAnswersOption1 = previousAnswers.filter((answer) => (answer.question_id === questionId && answer.option_selected === 1)).length;
   if (optionSelected === 0) {

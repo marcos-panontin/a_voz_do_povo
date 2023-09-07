@@ -1,51 +1,84 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { sendAnswerToDB } from '../API/fetchFunctions';
 import PreviousAnswersContext from '../context/PreviousAnswersContext';
 import calculateValues from '../services/calculateValues';
+import sendAnswerToLocalStorage from '../services/sendAnswerToLocalStorage';
+import findQuestionInLocalStorage from '../services/findQuestionInLocalStorage';
 
 function Question({ question }) {
-
-  const { previousAnswers } = useContext(PreviousAnswersContext);
-
-  const [answered, setAnswered] = useState(false);
+  // State variables for option quantities and question ID
   const [option0Quantity, setOption0Quantity] = useState(0);
   const [option1Quantity, setOption1Quantity] = useState(0);
-
   const questionId = question.id;
-  
-  const handleClick = async (optionSelected) => {
 
+  // Find question data in local storage
+  const questionInLocalStorage = findQuestionInLocalStorage(question.id);
+
+  // Get previous answers from context
+  const { previousAnswers } = useContext(PreviousAnswersContext);
+
+  // Effect to update quantities when `questionInLocalStorage.answered` changes
+  useEffect(() => {
+    // Only run the effect when `questionInLocalStorage.answered` changes
+    if (questionInLocalStorage.answered) {
+      const { option0, option1 } = calculateValues(previousAnswers, questionId);
+      setOption0Quantity(option0);
+      setOption1Quantity(option1);
+    }
+  }, [questionInLocalStorage.answered, previousAnswers, questionId]);
+
+  // State variable for tracking if the question is answered
+  const [answered, setAnswered] = useState(questionInLocalStorage.answered);
+
+  // Function to handle button click and update state and data
+  const handleClick = async (optionSelected) => {
     const { option0, option1 } = calculateValues(previousAnswers, questionId, optionSelected);
     setOption0Quantity(option0);
     setOption1Quantity(option1);
     setAnswered(true);
 
-    await sendAnswerToDB(optionSelected, questionId)
+    // Store answer in local storage
+    sendAnswerToLocalStorage(questionId, optionSelected);
 
+    // Send answer to the database
+    await sendAnswerToDB(optionSelected, questionId);
   }
 
   return (
     <article>
+      {/* Display the question */}
       <h2>{question.question}</h2>
-      {!answered &&
-      <section>
-        <button disabled={previousAnswers.length === 0 ? true : false} onClick={() => handleClick(0)}>{question.option0}</button>
-        <button disabled={previousAnswers.length === 0 ? true : false} onClick={() => handleClick(1)}>{question.option1}</button>
-      </section>
-    }
+      
+      {!answered && (
+        // Display buttons for answering if the question is not answered
+        <section>
+          <button disabled={previousAnswers.length === 0 ? true : false} onClick={() => handleClick(0)}>{question.option0}</button>
+          <button disabled={previousAnswers.length === 0 ? true : false} onClick={() => handleClick(1)}>{question.option1}</button>
+        </section>
+      )}
 
       {answered && (
+        // Display answer results if the question is answered
         <>
-        <section className='flex'>
-        <p>{question.option0} { option0Quantity }</p>
-        <p>{question.option1} { option1Quantity }</p>
-        </section>
-        <p>Total de respostas: { option0Quantity + option1Quantity }</p>
+          <section className='flex'>
+            <p>{question.option0} { option0Quantity }</p>
+            <p>{question.option1} { option1Quantity }</p>
+          </section>
+          <p>Total de respostas: { option0Quantity + option1Quantity }</p>
         </>
-
       )}
     </article>
   )
 }
+
+Question.propTypes = {
+  question: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    question: PropTypes.string.isRequired,
+    option0: PropTypes.string.isRequired,
+    option1: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Question;

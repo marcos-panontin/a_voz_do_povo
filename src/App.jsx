@@ -5,6 +5,7 @@ import { fetchAllAnswers } from './API/fetchFunctions';
 import { questions } from './data/questions';
 import Question from './components/Question';
 import getUserToken from './services/getUserToken';
+import getUserAnswersOnPageLoad from './services/getUserAnswersOnPageLoad';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
 
     initialFetch();
     getUserToken();
+    getUserAnswersOnPageLoad();
   }, [])
 
   return (

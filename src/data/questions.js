@@ -6,6 +6,9 @@ import ketchup from '../../public/images/questionsImages/ketchup.png';
 import omelette from '../../public/images/questionsImages/omelette.jpg';
 import clock from '../../public/images/questionsImages/clock.jpg';
 import ricebeans from '../../public/images/questionsImages/ricebeans.png';
+import oreo from '../../public/images/questionsImages/oreo.jpg';
+import toddynescau from '../../public/images/questionsImages/toddynescau.jpg';
+import chickenEgg from '../../public/images/questionsImages/chicken-egg.png';
 
 
 export const questions = [
@@ -29,6 +32,7 @@ export const questions = [
     option1Text: "A galinha nasceu primeiro",
     answered: false,
     answeredOption: null,
+    image: chickenEgg,
   },
   {
   id: 3,
@@ -39,6 +43,7 @@ export const questions = [
     option1Text: "O correto é bolacha",
     answered: false,
     answeredOption: null,
+    image: oreo,
   },
   {
   id: 4,
@@ -71,6 +76,7 @@ export const questions = [
     option1Text: "Nescau é melhor",
     answered: false,
     answeredOption: null,
+    image: toddynescau,
   },
   {
   id: 7,
@@ -82,6 +88,17 @@ export const questions = [
     answered: false,
     answeredOption: null,
     image: duckRabbit,
+  },
+  {
+  id: 10,
+    question: "Ketchup na pizza?",
+    option0: "Com certeza",
+    option1: "Jamais",
+    option0Text: "Ketchup na pizza? Com certeza",
+    option1Text: "Ketchup na pizza? Jamais",
+    answered: false,
+    answeredOption: null,
+    image: ketchup,
   },
   {
   id: 8,
@@ -96,25 +113,14 @@ export const questions = [
   },
   {
   id: 9,
-    question: "O papel higiênico deve sair por cima ou por baixo?",
-    option0: "Por cima",
-    option1: "Por baixo",
-    option0Text: "O papel higiênico deve sair por cima",
-    option1Text: "O papel higiênico deve sair por baixo",
+    question: "O papel higiênico deve sair por baixo ou por cima?",
+    option0: "Por baixo",
+    option1: "Por cima",
+    option0Text: "O papel higiênico deve sair por baixo",
+    option1Text: "O papel higiênico deve sair por cima",
     answered: false,
     answeredOption: null,
     image: toiletPaper,
-  },
-  {
-  id: 10,
-    question: "Ketchup na pizza?",
-    option0: "Com certeza",
-    option1: "Jamais",
-    option0Text: "Ketchup na pizza? Com certeza",
-    option1Text: "Ketchup na pizza? Jamais",
-    answered: false,
-    answeredOption: null,
-    image: ketchup,
   },
   {
   id: 11,

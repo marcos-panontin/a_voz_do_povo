@@ -11,7 +11,7 @@ function QuestionResult({ option0Quantity, option1Quantity, question }) {
   return (
     <article className='flex flex-col items-center'>
 
-      <p>A voz do povo decidiu:</p>
+      <p>A voz do povo diz:</p>
       <p>{ question[`${winningOption}Text`] }</p>
       
         <p>

@@ -8,7 +8,7 @@ import findQuestionInLocalStorage from '../services/findQuestionInLocalStorage';
 import checkIfAllQuestionsAreAnswered from '../services/checkIfAllQuestionsAreAnswered';
 import findPeopleWithSameAnswers from '../services/findPeopleWithSameAnswers';
 import Counter from './Counter';
-import ProgressBar from './ProgressBar';
+import ProgressBar2D from './ProgressBar2D';
 
 function Question({ question }) {
   // State variables for option quantities and question ID
@@ -77,11 +77,13 @@ function Question({ question }) {
             <p>{question.option0} { option0Quantity }</p>
             <p>{question.option1} { option1Quantity }</p>
           </section>
+          <ProgressBar2D 
+            winningOption={option0Quantity > option1Quantity ? 'option0' : 'option1'} 
+            progressPercentage={option0Quantity > option1Quantity ? option0Quantity / (option0Quantity + option1Quantity) * 100 : option1Quantity / (option0Quantity + option1Quantity) * 100} />
           <p>
           <Counter n={option0Quantity + option1Quantity} />
           <span> pessoas responderam</span>
           </p>
-          {/* <ProgressBar /> */}
         </>
       )}
     </article>

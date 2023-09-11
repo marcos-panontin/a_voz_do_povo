@@ -1,0 +1,41 @@
+import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import Counter from './Counter';
+
+const ProgressBar2D = ({ progressPercentage, winningOption }) => {
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setWidth(progressPercentage);
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [progressPercentage]);
+
+  return (
+    <div className="h-5 w-40 bg-gray-300">
+      <div
+        style={{
+          width: `${width}%`,
+          marginRight: winningOption === 'option0' ? 'auto' : '0',
+          marginLeft: winningOption === 'option0' ? '0' : 'auto',
+        }}
+        className="h-full bg-green-600 transition-width duration-500 ease-in-out"
+      >
+        <span>
+          <Counter n={isNaN(width) ? 0 : width} />
+        %</span>
+      </div>
+    </div>
+  );
+};
+
+ProgressBar2D.propTypes = {
+  progressPercentage: PropTypes.number.isRequired,
+  winningOption: PropTypes.string.isRequired,
+};
+
+export default ProgressBar2D;

@@ -8,15 +8,15 @@ function QuizResults() {
   return (
     <>
       {allAnswered && (
-              <section>QuizResults
+              <section>
               <section>
           <p>Todas as perguntas foram respondidas!</p>
-          <p>{peopleWithSameAnswers} pessoas responderam TODAS as perguntas igual a você!</p>
+          <p>{peopleWithSameAnswers} pessoas deram as mesmas respostas que você para TODAS as perguntas!</p>
           </section>
         </section>
         )}
     </>
-)  
+)
 }
 
 export default QuizResults

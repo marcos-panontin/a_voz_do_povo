@@ -13,8 +13,6 @@ function findPeopleWithSameAnswers(previousAnswers) {
     groupedAnswers[userId].push(answer);
   }
 
-  console.log(groupedAnswers);
-
   let peopleWithSameAnswers = 0;
   for (const userId in groupedAnswers) {
     const answers = groupedAnswers[userId];

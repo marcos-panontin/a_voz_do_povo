@@ -7,6 +7,7 @@ import sendAnswerToLocalStorage from '../services/sendAnswerToLocalStorage';
 import findQuestionInLocalStorage from '../services/findQuestionInLocalStorage';
 import checkIfAllQuestionsAreAnswered from '../services/checkIfAllQuestionsAreAnswered';
 import findPeopleWithSameAnswers from '../services/findPeopleWithSameAnswers';
+import Counter from './Counter';
 
 function Question({ question }) {
   // State variables for option quantities and question ID
@@ -75,7 +76,10 @@ function Question({ question }) {
             <p>{question.option0} { option0Quantity }</p>
             <p>{question.option1} { option1Quantity }</p>
           </section>
-          <p className='total-responses'>Total de respostas: { option0Quantity + option1Quantity }</p>
+          <p>
+          <Counter n={option0Quantity + option1Quantity} />
+          <span> pessoas responderam</span>
+          </p>
         </>
       )}
     </article>

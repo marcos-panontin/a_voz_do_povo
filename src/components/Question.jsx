@@ -8,6 +8,7 @@ import findQuestionInLocalStorage from '../services/findQuestionInLocalStorage';
 import checkIfAllQuestionsAreAnswered from '../services/checkIfAllQuestionsAreAnswered';
 import findPeopleWithSameAnswers from '../services/findPeopleWithSameAnswers';
 import Counter from './Counter';
+import ProgressBar from './ProgressBar';
 
 function Question({ question }) {
   // State variables for option quantities and question ID
@@ -80,6 +81,7 @@ function Question({ question }) {
           <Counter n={option0Quantity + option1Quantity} />
           <span> pessoas responderam</span>
           </p>
+          {/* <ProgressBar /> */}
         </>
       )}
     </article>

@@ -7,8 +7,8 @@ import sendAnswerToLocalStorage from '../services/sendAnswerToLocalStorage';
 import findQuestionInLocalStorage from '../services/findQuestionInLocalStorage';
 import checkIfAllQuestionsAreAnswered from '../services/checkIfAllQuestionsAreAnswered';
 import findPeopleWithSameAnswers from '../services/findPeopleWithSameAnswers';
-import Counter from './Counter';
-import ProgressBar2D from './ProgressBar2D';
+import QuestionResult from './QuestionResult';
+import ButtonsContainer from './ButtonsContainer';
 
 function Question({ question }) {
   // State variables for option quantities and question ID
@@ -63,37 +63,16 @@ function Question({ question }) {
   };
 
   return (
-    <article>
-      {/* Display the question */}
-      <h2 className="mt-10 mb-2">{question.question}</h2>
+    <article className='flex flex-col items-center'>
+      <img src={question.image} alt={question.question} className="w-80 object-cover mt-8" />
+      <h2 className="mt-2 mb-2">{question.question}</h2>
 
-      <section className="flex items-center justify-center gap-4">
-        <button
-          className={`button w-40 h-10 bg-blue-500 rounded-lg select-none text-white font-bold border-b-[1px] border-blue-400
-            ${
-              buttonClicked === 0
-                ? 'bg-blue-600 translate-y-2 transition-all duration-150'
-                : '[box-shadow:0_10px_0_0_#1b6ff8,0_15px_0_0_#1b70f841] '
-            }`}
-          disabled={previousAnswers.length === 0 || buttonClicked !== null}
-          onClick={() => handleClick(0)}
-        >
-          {question.option0}
-        </button>
+      <ButtonsContainer handleClick={handleClick} buttonClicked={buttonClicked} previousAnswers={previousAnswers} question={question} />
 
-        <button
-          className={`button w-40 h-10 bg-blue-500 rounded-lg select-none text-white font-bold border-b-[1px] border-blue-400
-            ${
-              buttonClicked === 1
-                ? 'bg-blue-600 translate-y-2 transition-all duration-150 border-b-[1px] [box-shadow:0_0px_0_0_#1b6ff8,0_0px_0_0_#1b70f841]'
-                : '[box-shadow:0_10px_0_0_#1b6ff8,0_15px_0_0_#1b70f841] '
-            }`}
-          disabled={previousAnswers.length === 0 || buttonClicked !== null}
-          onClick={() => handleClick(1)}
-        >
-          {question.option0}
-        </button>
-      </section>
+            {answered && (
+        <QuestionResult option0Quantity={option0Quantity} option1Quantity={option1Quantity} question={question} />
+
+      )}
     </article>
   );
 }

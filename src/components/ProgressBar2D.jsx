@@ -16,18 +16,15 @@ const ProgressBar2D = ({ progressPercentage, winningOption }) => {
   }, [progressPercentage]);
 
   return (
-    <div className="h-3 w-40 rounded-md bg-gray-300 shadow-lg">
+    <div className="h-3 w-80 rounded-md bg-gray-300 shadow-lg">
       <div
         style={{
           width: `${width}%`,
           marginRight: winningOption === 'option0' ? 'auto' : '0',
           marginLeft: winningOption === 'option0' ? '0' : 'auto',
         }}
-        className="h-full bg-blue-600 rounded-md transition-width duration-500 ease-in-out"
+        className="h-full bg-blue-600 rounded-md transition-width duration-700 ease-in-out"
       >
-        <span>
-          <Counter n={isNaN(width) ? 0 : width} />
-        %</span>
       </div>
     </div>
   );

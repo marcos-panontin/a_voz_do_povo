@@ -9,6 +9,7 @@ import getUserAnswersOnPageLoad from './services/getUserAnswersOnPageLoad';
 import QuizResults from './components/QuizResults';
 import checkIfAllQuestionsAreAnswered from './services/checkIfAllQuestionsAreAnswered';
 import findPeopleWithSameAnswers from './services/findPeopleWithSameAnswers';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -32,9 +33,12 @@ function App() {
     <main className='flex flex-col items-center'>
       <PreviousAnswersContext.Provider value={{ previousAnswers, allAnswered, setAllAnswered, peopleWithSameAnswers, setPeopleWithSameAnswers  }}>
         <h1 className='text-5xl text-blue-800'>A Voz Do Povo</h1>
+
+        <h2>Algumas dúvidas assolam o ser humano há milhares de anos. Chegou a hora de encontrar a resposta definitiva para elas.</h2>
         {questions.map((question) => 
           (<Question key={question.question} question={question} />))}
         <QuizResults />
+        <Footer />
       </PreviousAnswersContext.Provider>
     </main>
   )

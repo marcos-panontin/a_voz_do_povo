@@ -29,14 +29,14 @@ function App() {
   }, [])
 
   return (
-    <>
+    <main className='flex flex-col items-center'>
       <PreviousAnswersContext.Provider value={{ previousAnswers, allAnswered, setAllAnswered, peopleWithSameAnswers, setPeopleWithSameAnswers  }}>
-        <h1>A Voz Do Povo</h1>
+        <h1 className='text-5xl text-blue-800'>A Voz Do Povo</h1>
         {questions.map((question) => 
           (<Question key={question.question} question={question} />))}
         <QuizResults />
       </PreviousAnswersContext.Provider>
-    </>
+    </main>
   )
 }
 

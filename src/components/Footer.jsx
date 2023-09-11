@@ -1,13 +1,31 @@
+import LinkedinIcon from '../../public/images/icons/linkedin.svg';
+import GithubIcon from '../../public/images/icons/github.svg';
 
 function Footer() {
   return (
-    <footer className="fixed bottom-0 text-center bg-blue-700 w-screen text-white font-bold py-1 text-xs">
-      
-      <p>
-      Desenvolvido por Marcos Panontin <span>Github</span> <span>Linkedin</span>
-      </p>
+    <footer className="bg-blue-700 text-white text-center font-bold text-xs py-1 w-full">
+      <div className="flex items-center justify-center">
+        <span>Desenvolvido por Marcos Panontin</span>
+        <a
+          href="<https://www.linkedin.com/in/marcos-panontin/>"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-1 text-red-500 hover:text-red-600"
+        >
+          <img className="h-6" src={LinkedinIcon} alt="Linkedin Icon" />
+        </a>
+        <a
+          href="<https://github.com/marcos-panontin>"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-1 text-red-500 hover:text-red-600"
+        >
+          <img className="h-6" src={GithubIcon} alt="Github Icon" />
+
+        </a>
+      </div>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

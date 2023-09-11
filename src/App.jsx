@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 function App() {
 
   const [previousAnswers, setPreviousAnswers] = useState([]);
+  console.log(previousAnswers);
   const [allAnswered, setAllAnswered] = useState(checkIfAllQuestionsAreAnswered() || false);
   const [peopleWithSameAnswers, setPeopleWithSameAnswers] = useState(findPeopleWithSameAnswers(previousAnswers) || 0);
 

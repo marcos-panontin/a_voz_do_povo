@@ -63,9 +63,9 @@ function Question({ question }) {
   };
 
   return (
-    <article className='flex flex-col items-center'>
-      <img src={question.image} alt={question.question} className="w-80 object-cover mt-8" />
-      <h2 className="mt-2 mb-2">{question.question}</h2>
+    <article className='flex flex-col items-center justify-center'>
+      <img src={question.image} alt={question.question} className="w-80 object-cover mt-8 " />
+      <h2 className="mt-2 mb-2 text-center">{question.question}</h2>
 
       <ButtonsContainer handleClick={handleClick} buttonClicked={buttonClicked} previousAnswers={previousAnswers} question={question} />
 

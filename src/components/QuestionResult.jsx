@@ -11,10 +11,10 @@ function QuestionResult({ option0Quantity, option1Quantity, question }) {
   return (
     <article className='flex flex-col items-center'>
 
-      <p>A voz do povo diz:</p>
-      <p>{ question[`${winningOption}Text`] }</p>
+      <p className='uppercase'>A voz do povo diz:</p>
+      <p className='mb-2'>{ question[`${winningOption}Text`] }</p>
       
-        <p>
+        <p className='text-blue-700 font-bold'>
           <Counter n={isNaN(progressPercentage) ? 0 : progressPercentage} />
         %
         </p>

@@ -2,3 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+
+  .glow {
+    box-shadow: 
+    0 0 5px #3da4f8,
+    0 0 15px #3da4f8,
+    0 0 20px #3da4f8,
+    0 0 10px;
+  }
+  .boxshadowBar {
+    box-shadow: 
+    0 0 5px #3da4f8,
+    0 0 15px #3da4f8,
+    0 0 100px;
+  }
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../public/fonts/ADELIA.otf");
+}

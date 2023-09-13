@@ -7,7 +7,7 @@ function Footer() {
       <div className="flex items-center justify-center">
         <span>Desenvolvido por Marcos Panontin</span>
         <a
-          href="<https://www.linkedin.com/in/marcos-panontin/>"
+          href="https://www.linkedin.com/in/marcos-panontin/"
           target="_blank"
           rel="noopener noreferrer"
           className="ml-1 text-red-500 hover:text-red-600"
@@ -15,7 +15,7 @@ function Footer() {
           <img className="h-6" src={LinkedinIcon} alt="Linkedin Icon" />
         </a>
         <a
-          href="<https://github.com/marcos-panontin>"
+          href="https://github.com/marcos-panontin"
           target="_blank"
           rel="noopener noreferrer"
           className="ml-1 text-red-500 hover:text-red-600"
